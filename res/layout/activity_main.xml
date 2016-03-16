@@ -28,7 +28,7 @@
         </ListView>
     </LinearLayout>
 
-    <RelativeLayout
+    <com.huan.tv.qqnewfeature.MainBoardLayout
         android:id="@+id/rl_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -61,6 +61,6 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/rl_head_main" >
         </ListView>
-    </RelativeLayout>
+    </com.huan.tv.qqnewfeature.MainBoardLayout>
 
 </com.huan.tv.qqnewfeature.DrawHelperLayout>

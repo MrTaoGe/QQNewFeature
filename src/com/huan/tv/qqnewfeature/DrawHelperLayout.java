@@ -301,4 +301,12 @@ public class DrawHelperLayout extends FrameLayout {
 		measuredHeight = mainBoardView.getMeasuredHeight();
 		dragRange = (int) (measuredWidth*0.6f);
 	}
+	
+	public DragStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(DragStatus status) {
+		this.status = status;
+	}
 }

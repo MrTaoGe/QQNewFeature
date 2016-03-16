@@ -25,6 +25,7 @@ public class MainActivity extends Activity {
 
 	private ListView listView_left,listView_main;
 	private ImageView iv_head;
+	private MainBoardLayout mainBoardLayout;
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
@@ -33,6 +34,7 @@ public class MainActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
 		iv_head = (ImageView) findViewById(R.id.iv_head_main);
+		mainBoardLayout = (MainBoardLayout) findViewById(R.id.rl_main);
 		listView_left = (ListView) findViewById(R.id.listView_left);
 		listView_main = (ListView) findViewById(R.id.list_main);
 		listView_left.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, NamesSet.EnglishNames){
@@ -63,8 +65,9 @@ public class MainActivity extends Activity {
 				animator.setInterpolator(new CycleInterpolator(2.0f));
 				animator.setDuration(500);
 				animator.start();
-				
 			}
 		});
+		
+		mainBoardLayout.setDrawHelperLayout(rootView);
 	}
 }
