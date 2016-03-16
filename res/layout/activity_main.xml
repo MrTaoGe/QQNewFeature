@@ -1,20 +1,66 @@
 <com.huan.tv.qqnewfeature.DrawHelperLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_top" >
 
     <LinearLayout
+        android:id="@+id/ll_left"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#66ccff00"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:paddingBottom="50dip"
+        android:paddingLeft="10dip"
+        android:paddingTop="50dip" >
+
+        <ImageView
+            android:id="@+id/icon_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/head" />
+
+        <ListView
+            android:id="@+id/listView_left"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </ListView>
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/rl_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#88ddff00" >
+
+        <RelativeLayout
+            android:id="@+id/rl_head_main"
+            android:layout_width="match_parent"
+            android:layout_height="50dip"
+            android:background="#18b2e7" >
+
+            <ImageView
+                android:id="@+id/iv_head_main"
+                android:layout_width="30dip"
+                android:layout_height="30dip"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dip"
+                android:src="@drawable/head" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/qq_title" />
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/list_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/rl_head_main" >
+        </ListView>
     </RelativeLayout>
 
 </com.huan.tv.qqnewfeature.DrawHelperLayout>
