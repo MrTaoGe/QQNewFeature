@@ -5,5 +5,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="qq_title">QQ title</string>
+    <string name="title_activity_sticky">StickyActivity</string>
+    <string name="title_activity_swipe">SwipeActivity</string>
 
 </resources>

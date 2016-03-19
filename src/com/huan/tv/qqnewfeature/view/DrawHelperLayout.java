@@ -1,4 +1,4 @@
-package com.huan.tv.qqnewfeature;
+package com.huan.tv.qqnewfeature.view;
 
 import com.nineoldandroids.view.ViewHelper;
 

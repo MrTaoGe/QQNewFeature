@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.huan.tv.qqnewfeature.view.SwipeView
+        android:id="@+id/swipeview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <include
+            android:id="@+id/ll_delete"
+            layout="@layout/layout_delete" />
+
+        <include
+            android:id="@+id/ll_content"
+            layout="@layout/layout_content" />
+    </com.huan.tv.qqnewfeature.view.SwipeView>
+
+</LinearLayout>

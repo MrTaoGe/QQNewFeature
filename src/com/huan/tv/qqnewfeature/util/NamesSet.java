@@ -1,4 +1,4 @@
-package com.huan.tv.qqnewfeature;
+package com.huan.tv.qqnewfeature.util;
 
 /**
  * 名字集合，包括梁山108将的中英文名

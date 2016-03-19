@@ -22,6 +22,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".StickyActivity"
+            android:label="@string/title_activity_sticky" >
+        </activity>
+        <activity
+            android:name=".SwipeActivity"
+            android:label="@string/title_activity_swipe" >
+        </activity>
     </application>
 
 </manifest>

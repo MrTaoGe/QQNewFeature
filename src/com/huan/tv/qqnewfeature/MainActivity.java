@@ -5,6 +5,7 @@ import java.util.Random;
 import android.animation.ObjectAnimator;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,13 +13,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.CycleInterpolator;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.huan.tv.qqnewfeature.DrawHelperLayout.DragStatusChangedListener;
+import com.huan.tv.qqnewfeature.util.NamesSet;
+import com.huan.tv.qqnewfeature.view.DrawHelperLayout;
+import com.huan.tv.qqnewfeature.view.MainBoardLayout;
+import com.huan.tv.qqnewfeature.view.DrawHelperLayout.DragStatusChangedListener;
 import com.nineoldandroids.view.ViewHelper;
 
 public class MainActivity extends Activity {
@@ -46,6 +52,13 @@ public class MainActivity extends Activity {
 			}
 		});
 		listView_main.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, NamesSet.ChineseNames));
+		listView_main.setOnItemClickListener(new OnItemClickListener() {
+
+			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+				Intent intent = new Intent(MainActivity.this,SwipeActivity.class);
+				startActivity(intent);
+			}
+		});
 		DrawHelperLayout rootView = (DrawHelperLayout) findViewById(R.id.root_view);
 		rootView.setDragStatusChangedListener(new DragStatusChangedListener() {
 			

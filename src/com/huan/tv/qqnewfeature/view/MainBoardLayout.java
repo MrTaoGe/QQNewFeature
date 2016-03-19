@@ -1,6 +1,7 @@
-package com.huan.tv.qqnewfeature;
+package com.huan.tv.qqnewfeature.view;
 
-import com.huan.tv.qqnewfeature.DrawHelperLayout.DragStatus;
+
+import com.huan.tv.qqnewfeature.view.DrawHelperLayout.DragStatus;
 
 import android.content.Context;
 import android.support.v4.view.MotionEventCompat;
