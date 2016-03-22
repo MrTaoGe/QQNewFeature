@@ -21,6 +21,12 @@ public class SwipeView extends FrameLayout {
 	private ViewDragHelper dragHelper;
 	private View contentView,deleteView;
 	private boolean hasOpen = false;
+	private SwipeStatus swipeStatus = SwipeStatus.Close;
+	private OnSwipeStatusChangedListener swipeStatusChangedListener;
+	private int contentViewWidth;
+	private int deleteViewWidth;
+	private int deleteViewHeight;
+	
 	public SwipeView(Context context) {
 		this(context,null);
 	}
@@ -33,7 +39,29 @@ public class SwipeView extends FrameLayout {
 		super(context, attrs, defStyle);
 		initView();
 	}
-
+	/**滑动状态改变的枚举*/
+	public enum SwipeStatus{
+		Open,Close,Swiping
+	}
+	public SwipeStatus getCurrentStatus(){
+		return swipeStatus;
+	}
+	
+	
+	/**滑动状态发生改变时的监听*/
+	public interface OnSwipeStatusChangedListener{
+		void onOpen(SwipeView openView);
+		void onClose(SwipeView closeView);
+		void onSwipe(SwipeView swipeView);
+	}
+	
+	public void setSwipeStatusChangedListener(OnSwipeStatusChangedListener swipeStatusChangedListener){
+		this.swipeStatusChangedListener = swipeStatusChangedListener;
+	}
+	
+	public OnSwipeStatusChangedListener getOnSwipeStatusChangedListener(){
+		return swipeStatusChangedListener;
+	}
 	private void initView() {
 		dragHelper = ViewDragHelper.create(this, callback);
 	}
@@ -44,10 +72,12 @@ public class SwipeView extends FrameLayout {
 		public boolean tryCaptureView(View child, int pointerId) {
 			return child==contentView||child==deleteView;
 		}
+		
 		@Override
 		public int getViewHorizontalDragRange(View child) {
-			return 0;
+			return deleteViewWidth;
 		}
+		
 		@Override
 		public int clampViewPositionHorizontal(View child, int left, int dx) {
 			if(child==contentView){
@@ -60,11 +90,12 @@ public class SwipeView extends FrameLayout {
 			return left;
 
 		}
+		
 		@Override
 		public void onViewDragStateChanged(int state) {
 			super.onViewDragStateChanged(state);
 		}
-
+		//滑动条目的回调一般写在这里。
 		@Override
 		public void onViewPositionChanged(View changedView, int left, int top,int dx, int dy) {
 			super.onViewPositionChanged(changedView, left, top, dx, dy);
@@ -73,8 +104,24 @@ public class SwipeView extends FrameLayout {
 			}else{
 				contentView.layout(contentView.getLeft()+dx, 0, contentView.getRight()+dx, contentView.getBottom());
 			}
+			if(contentView.getLeft()==0&&swipeStatus!=SwipeStatus.Close){
+				swipeStatus = SwipeStatus.Close;
+				if(swipeStatusChangedListener!=null){
+					swipeStatusChangedListener.onClose(SwipeView.this);
+				}
+			}else if(contentView.getLeft()==-deleteViewWidth&&swipeStatus!=SwipeStatus.Open){
+				swipeStatus = SwipeStatus.Open;
+				if(swipeStatusChangedListener!=null){
+					swipeStatusChangedListener.onOpen(SwipeView.this);
+				}
+			}else if(swipeStatus!=SwipeStatus.Swiping){
+				swipeStatus = SwipeStatus.Swiping;
+				if(swipeStatusChangedListener!=null){
+					swipeStatusChangedListener.onSwipe(SwipeView.this);
+				}
+			}
 		}
-
+		//滑动释放后的一些动画效果一般写在这里。
 		@Override
 		public void onViewReleased(View releasedChild, float xvel, float yvel) {
 			super.onViewReleased(releasedChild, xvel, yvel);
@@ -87,12 +134,8 @@ public class SwipeView extends FrameLayout {
 			}else{//否则自动关闭
 				close(true);
 			}
-			
 		}
 	};
-	private int contentViewWidth;
-	private int deleteViewWidth;
-	private int deleteViewHeight;
 
 	@Override
 	protected void onLayout(boolean changed, int left, int top, int right,int bottom) {
@@ -105,7 +148,7 @@ public class SwipeView extends FrameLayout {
 	 * 关闭拉出的条目
 	 * @param isSmooth 是否平滑移动
 	 */
-	protected void close(boolean isSmooth) {
+	public void close(boolean isSmooth) {
 		if(isSmooth){
 			if(dragHelper.smoothSlideViewTo(contentView, 0, 0)){
 				ViewCompat.postInvalidateOnAnimation(this);
@@ -113,6 +156,10 @@ public class SwipeView extends FrameLayout {
 		}else{
 			contentView.layout(0, 0, contentViewWidth, deleteViewHeight);
 			deleteView.layout(contentViewWidth, 0, contentViewWidth+deleteViewWidth,deleteViewHeight);
+			swipeStatus = SwipeStatus.Close;
+			if(swipeStatusChangedListener!=null){
+				swipeStatusChangedListener.onClose(this);
+			}
 		}
 		hasOpen = false;
 	}
@@ -120,7 +167,7 @@ public class SwipeView extends FrameLayout {
 	 * 打开拉出的条目
 	 * @param isSmooth 是否平滑移动
 	 */
-	protected void open(boolean isSmooth) {
+	public void open(boolean isSmooth) {
 		if(isSmooth){
 			if(dragHelper.smoothSlideViewTo(contentView, -deleteViewWidth, 0)){
 				ViewCompat.postInvalidateOnAnimation(this);
@@ -153,6 +200,7 @@ public class SwipeView extends FrameLayout {
 	public boolean onInterceptTouchEvent(MotionEvent ev) {
 		return dragHelper.shouldInterceptTouchEvent(ev);
 	}
+	
 	private int lastX,lastY;
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
@@ -160,7 +208,6 @@ public class SwipeView extends FrameLayout {
 		int y = (int) event.getY();
 		switch (MotionEventCompat.getActionMasked(event)) {
 		case MotionEvent.ACTION_DOWN:
-			
 			break;
 		case MotionEvent.ACTION_MOVE:
 			int deltaX = lastX - x;
@@ -171,9 +218,7 @@ public class SwipeView extends FrameLayout {
 			}
 			break;
 		case MotionEvent.ACTION_UP:
-			
 			break;
-
 		default:
 			break;
 		}
@@ -188,7 +233,4 @@ public class SwipeView extends FrameLayout {
 		deleteView = getChildAt(0);
 		contentView = getChildAt(1);
 	}
-	
-	
-		
 }
