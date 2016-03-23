@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
+    <issue id="InlinedApi">
+        <ignore path="src/com/huan/tv/qqnewfeature/ParallaxActivity.java" />
+    </issue>
     <issue id="NewApi">
         <ignore path="src/com/huan/tv/qqnewfeature/MainActivity.java" />
+        <ignore path="src/com/huan/tv/qqnewfeature/ParallaxActivity.java" />
+        <ignore path="src/com/huan/tv/qqnewfeature/view/ParallaxListView.java" />
     </issue>
 </lint>

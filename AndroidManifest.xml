@@ -31,6 +31,7 @@
             android:label="@string/title_activity_swipe" >
         </activity>
         <activity android:name=".QuickIndexActivity"/>
+        <activity android:name=".ParallaxActivity"/>
     </application>
 
 </manifest>
