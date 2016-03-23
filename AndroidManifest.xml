@@ -30,6 +30,7 @@
             android:name=".SwipeActivity"
             android:label="@string/title_activity_swipe" >
         </activity>
+        <activity android:name=".QuickIndexActivity"/>
     </application>
 
 </manifest>

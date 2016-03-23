@@ -55,7 +55,7 @@ public class MainActivity extends Activity {
 		listView_main.setOnItemClickListener(new OnItemClickListener() {
 
 			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-				Intent intent = new Intent(MainActivity.this,SwipeActivity.class);
+				Intent intent = new Intent(MainActivity.this,QuickIndexActivity.class);
 				startActivity(intent);
 			}
 		});

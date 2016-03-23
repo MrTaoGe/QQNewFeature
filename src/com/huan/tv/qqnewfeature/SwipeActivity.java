@@ -43,5 +43,4 @@ public class SwipeActivity extends Activity{
 			}
 		});
 	}
-
 }

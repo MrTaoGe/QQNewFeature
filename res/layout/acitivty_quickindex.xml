@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ListView
+        android:id="@+id/listview_quickindex"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </ListView>
+
+    <com.huan.tv.qqnewfeature.view.QuickIndexView
+        android:id="@+id/quickIndexView1"
+        android:layout_width="30dip"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:background="#E8483F" />
+
+    <TextView
+        android:id="@+id/tv_letter_selected"
+        android:layout_width="50dip"
+        android:layout_height="50dip"
+        android:layout_centerInParent="true"
+        android:background="@drawable/bg_letter_selected"
+        android:gravity="center"
+        android:textColor="#ccffffff"
+        android:textSize="26sp"
+        android:visibility="gone" />
+
+</RelativeLayout>
